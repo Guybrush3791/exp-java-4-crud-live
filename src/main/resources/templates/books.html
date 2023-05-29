@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Books</h1> 
+	<a th:href="@{/books/create}">CREATE NEW BOOK</a>
+	<form th:action="@{/books/by/title}" method="POST">
+		<label>Titolo</label>
+		<input type="text" name="title" th:value="${title}">
+		<br>
+		<input type="submit" value="Search">
+	</form>
+	<ul>
+		<li
+			th:each="book : ${books}"
+			th:object="${book}"
+		>
+			<a th:href="@{/books/{id} (id=*{id})}">
+				[[ *{title} ]]
+			</a>
+		</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:object="${book}">
+	<h1>Book</h1>
+	<h3>[[ *{title} ]] - [[ *{author} ]] ([[ *{publisher} ]])</h3>
+	<h4>Year: [[ *{year} ]]</h4>
+	<h4>ISBN: [[ *{isbn} ]]</h4>
+	<h4>Copies: [[ *{copies} ]]</h4>
+</body>
+</html>
