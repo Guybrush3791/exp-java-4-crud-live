@@ -26,6 +26,8 @@ public class Book {
 	private String isbn;
 	private Integer copies;
 	
+	private boolean deleted = false;
+	
 	public Book() { }
 	public Book(String title, String author, String publisher, int year, String isbn, int copies) {
 		
@@ -40,7 +42,7 @@ public class Book {
 	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getTitle() {
@@ -64,7 +66,7 @@ public class Book {
 	public Integer getYear() {
 		return year;
 	}
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 	public String getIsbn() {
@@ -76,8 +78,14 @@ public class Book {
 	public Integer getCopies() {
 		return copies;
 	}
-	public void setCopies(int copies) {
+	public void setCopies(Integer copies) {
 		this.copies = copies;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	@Override

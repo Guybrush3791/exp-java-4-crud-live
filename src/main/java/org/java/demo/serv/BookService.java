@@ -18,6 +18,10 @@ public class BookService {
 		
 		return bookRepo.findAll();
 	}
+	public List<Book> findAllNotDeleted() {
+		
+		return bookRepo.findByDeletedFalse();
+	}
 	public Book save(Book book) {
 		
 		return bookRepo.save(book);
@@ -28,6 +32,10 @@ public class BookService {
 	}
 	public List<Book> findByTitle(String title) {
 		
-		return bookRepo.findByTitleContaining(title);
+		return bookRepo.findByTitleContainingAndDeletedFalse(title);
+	}
+	public void deleteBook(Book book) {
+		
+		bookRepo.delete(book);
 	}
 }

@@ -21,6 +21,18 @@
 			<a th:href="@{/books/{id} (id=*{id})}">
 				[[ *{title} ]]
 			</a>
+			 - 
+			<a th:href="@{/books/delete/{id} (id=*{id})}">
+				DELETE
+			</a>
+			 - 
+			<a th:href="@{/books/soft-delete/{id} (id=*{id})}">
+				SOFT DELETE
+			</a>
+			 - 
+			<a th:href="@{/books/update/{id} (id=*{id})}">
+				UPDATE
+			</a>
 		</li>
 	</ul>
 </body>

@@ -23,7 +23,7 @@ public class BookController {
 	@GetMapping("/")
 	public String getHome(Model model) {
 		
-		List<Book> books = bookService.findAll();
+		List<Book> books = bookService.findAllNotDeleted();
 		
 		model.addAttribute("books", books);
 		
@@ -66,4 +66,67 @@ public class BookController {
 		
 		return "redirect:/";
 	}
+	
+	@GetMapping("/books/delete/{id}")
+	public String deleteBook(
+			@PathVariable int id
+		) {
+		
+		Optional<Book> bookOpt = bookService.findById(id);
+		Book book = bookOpt.get();
+		bookService.deleteBook(book);
+		
+		return "redirect:/";
+	}
+	@GetMapping("/books/soft-delete/{id}")
+	public String softDeleteBook(
+			@PathVariable int id
+		) {
+		
+		Optional<Book> bookOpt = bookService.findById(id);
+		Book book = bookOpt.get();
+		
+		book.setDeleted(true);
+		bookService.save(book);
+		
+		return "redirect:/";
+	}
+	
+	@GetMapping("/books/update/{id}")
+	public String editBook(
+			Model model,
+			@PathVariable int id
+		) {
+		
+		Optional<Book> bookOpt = bookService.findById(id);
+		Book book = bookOpt.get();
+		model.addAttribute("book", book);
+		
+		return "book-update";
+	}
+	@PostMapping("/books/update/{id}")
+	public String updateBook(
+			@PathVariable int id,
+			@ModelAttribute Book book
+		) {
+		
+		bookService.save(book);
+		
+		return "redirect:/";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
