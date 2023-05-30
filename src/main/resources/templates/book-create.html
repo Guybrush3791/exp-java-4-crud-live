@@ -4,26 +4,62 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body th:object="${book}">
 	<h1>Create book</h1>
 	<form method="POST">
 		<label>title</label>
-		<input type="text" name="title">
+		<input type="text" name="title" th:value="*{title}">
+		<label 
+			style="color: red"
+			th:if="${errors != null && errors.hasFieldErrors('title')}"
+		>
+			[[ ${errors.getFieldError('title').defaultMessage} ]]
+		</label>
 		<br>
 		<label>author</label>
-		<input type="text" name="author">
+		<input type="text" name="author" th:value="*{author}">
+		<label 
+			style="color: red"
+			th:if="${errors != null && errors.hasFieldErrors('author')}"
+		>
+			[[ ${errors.getFieldError('author').defaultMessage} ]]
+		</label>
 		<br>
 		<label>publisher</label>
-		<input type="text" name="publisher">
+		<input type="text" name="publisher" th:value="*{publisher}">
+		<label 
+			style="color: red"
+			th:if="${errors != null && errors.hasFieldErrors('publisher')}"
+		>
+			[[ ${errors.getFieldError('publisher').defaultMessage} ]]
+		</label>
 		<br>
 		<label>year</label>
-		<input type="number" name="year">
+		<input type="number" name="year" th:value="*{year}">
+		<label 
+			style="color: red"
+			th:if="${errors != null && errors.hasFieldErrors('year')}"
+		>
+			[[ ${errors.getFieldError('year').defaultMessage} ]]
+		</label>
 		<br>
 		<label>isbn</label>
-		<input type="text" name="isbn">
+		<input type="text" name="isbn" th:value="*{isbn}">
+		<label 
+			style="color: red"
+			th:if="${errors != null && errors.hasFieldErrors('isbn')}"
+		>
+			[[ ${errors.getFieldError('isbn').defaultMessage} ]]
+		</label>
 		<br>
 		<label>copies</label>
-		<input type="number" name="copies">
+		<input type="number" name="copies" th:value="*{copies}">
+		<label 
+			style="color: red"
+			th:if="${errors != null && errors.hasFieldErrors('copies')}"
+		>
+			[[ ${errors.getFieldError('copies').defaultMessage} ]]
+		</label>
 		<br>
 		<input type="submit" value="CREATE">
 	</form>

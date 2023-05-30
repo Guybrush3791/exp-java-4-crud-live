@@ -8,11 +8,15 @@ import org.java.demo.serv.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class BookController {
@@ -54,13 +58,32 @@ public class BookController {
 	}
 
 	@GetMapping("/books/create")
-	public String createBook() {
+	public String createBook(Model model) {
+		
+		model.addAttribute("book", new Book());
 		
 		return "book-create";
 	}
 	
 	@PostMapping("/books/create")
-	public String storeBook(@ModelAttribute Book book) {
+	public String storeBook(
+			Model model,
+			@Valid @ModelAttribute Book book,
+			BindingResult bindingResult) {
+		
+		if (bindingResult.hasErrors()) {
+			
+			for (ObjectError err : bindingResult.getAllErrors()) 
+				System.err.println("error: " + err.getDefaultMessage());
+			
+			model.addAttribute("book", book);
+			model.addAttribute("errors", bindingResult);
+			
+//			if (bindingResult.hasFieldErrors("title"))
+			bindingResult.getFieldError("title").getDefaultMessage();
+			
+			return "book-create";
+		}
 		
 		bookService.save(book);
 		
